@@ -7,4 +7,12 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('front/index');
 	}
+	public function hakkimizda()
+	{
+		$this->load->view('front/hakkimizda');
+	}
+	public function iletisim()
+	{
+		$this->load->view('front/iletisim');
+	}
 }
