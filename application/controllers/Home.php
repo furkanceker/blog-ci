@@ -11,6 +11,10 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('front/hakkimizda');
 	}
+	public function blog($id)
+	{
+		$this->load->view('front/blog');
+	}
 	public function iletisim()
 	{
 		$this->load->view('front/iletisim');
