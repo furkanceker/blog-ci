@@ -20,6 +20,8 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Giriş Yap</h3></div>
                                     <div class="card-body">
+                                    <?php if($this->session->flashdata('error')){echo "<div class='alert alert-danger'>".$this->session->flashdata('error').'</div>'; } ?>
+                                    <?php if($this->session->flashdata('empty')){echo "<div class='alert alert-warning'>".$this->session->flashdata('empty').'</div>'; } ?>
                                         <form action="<?= base_url('admin/login/') ?>" method="post">
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputEmail" name="email" type="email" placeholder="Email" />
