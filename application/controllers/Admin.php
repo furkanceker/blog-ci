@@ -48,6 +48,23 @@ class Admin extends CI_Controller {
 		$this->load->view('back/index');
 	}
 
+	public function yoneticiler(){
+		$this->load->view('back/yoneticiler');
+	}
+
+	public function sifre(){
+		$this->load->view('back/sifre-degistirme');
+	}
+	public function hakkimizda(){
+		$this->load->view('back/hakkimizda');
+	}
+	public function iletisim(){
+		$this->load->view('back/iletisim');
+	}
+	public function blog(){
+		$this->load->view('back/blog');
+	}
+
 	public function logout(){
 		$this->session->sess_destroy();
 		redirect('admin');

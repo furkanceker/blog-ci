@@ -11,6 +11,11 @@ class Common_model extends CI_Model {
         return $result;
     }
 
+    public function get_all($table){
+        $result = $this->db->get($table)->result();
+        return $result;
+    }
+
 }
 
 ?>
