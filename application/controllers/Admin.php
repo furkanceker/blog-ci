@@ -34,7 +34,13 @@ class Admin extends CI_Controller {
 			$exist = $this->common_model->get($data,"admin");
 			if($exist){
 				$this->session->set_userdata('adminlogin',true);
-				$this->session->set_userdata('admininfo',$exist);
+				$this->session->set_userdata([
+					'oturum'=>true,
+					'id'=>$exist->id,
+					'name'=>$exist->name,
+					'email'=>$exist->email,
+					'password'=>$exist->password,
+				]);
 				redirect('admin/panel');
 			}else{
 				$error = "E-Posta veya Şifre Hatalı";
@@ -49,12 +55,98 @@ class Admin extends CI_Controller {
 	}
 
 	public function yoneticiler(){
-		$this->load->view('back/yoneticiler');
+		$data['adminler'] = $this->common_model->get_all("admin");
+		$this->load->view('back/yoneticiler',$data);
+	}
+
+	public function yoneticipost(){
+		$name = $this->input->post("name");
+		$email = $this->input->post("email");
+		$password = $this->input->post("password");
+		$encpass = sha1(md5($password));
+		if(!$name || !$email || !$password){
+			flash('warning','Boş Alanları Doldurun');
+			back();
+			back();
+		}else{
+
+			$exist = $this->common_model->get(['email'=>$email],"admin");
+			if($exist){
+				flash('warning','Yönetici Zaten Kayıtlı');
+				back();
+			}else{
+				$data = [
+					'name' => $name,
+					'email' => $email,
+					'password' => $encpass,
+				];
+
+				$query = $this->common_model->insert("admin",$data);
+				if($query){
+					flash('success','Yönetici Eklendi');
+					back();
+				}else{
+					flash('danger','Yönetici Ekleme Başarısız');
+					back();
+				}
+			}
+		}
+	}
+
+	public function yoneticisil($id){
+		$uid = $this->session->userdata('id');
+		if($uid != $id){
+			$exist = $this->common_model->get(['id'=>$id],"admin");
+			if($exist){
+				$delete = $this->common_model->delete("admin",['id'=>$id]);
+				if($delete){
+					flash('success','Yönetici Silindi');
+					back();
+				}else{
+					flash('danger','Yönetici Silme Başarısız');
+					back();
+				}
+			}else{
+				flash('warning','Yönetici Bulunamadı');
+				back();
+			}
+		}else{
+			flash('warning','Kendinizi Silemezsiniz');
+			back();
+		}
 	}
 
 	public function sifre(){
 		$this->load->view('back/sifre-degistirme');
 	}
+
+	public function sifrepost(){
+		$uid = $this->session->userdata('id');
+		$oldpass = $this->input->post("sifre");
+		$encpass = sha1(md5($oldpass));
+		$newpass = $this->input->post("yenisifre");
+		$encpass2 = sha1(md5($newpass));
+		if(!$oldpass || !$newpass){
+			flash('warning','Boş Alanları Doldurun');
+			back();
+		}else{
+			$exist = $this->common_model->get(['id'=>$uid,'password'=>$encpass],"admin");
+			if($exist){
+				$result = $this->common_model->update($uid,"admin",['password'=>$encpass2]);
+				if($result){
+					flash('success','Şifre Değiştirildi');
+					back();
+				}else{
+					flash('danger','Şifre Değiştirme Başarısız');
+					back();
+				}
+			}else{
+				flash('danger','Eski Şifre Hatalı');
+				back();
+			}
+		}
+	}
+
 	public function hakkimizda(){
 		$this->load->view('back/hakkimizda');
 	}
