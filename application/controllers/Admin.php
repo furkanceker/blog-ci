@@ -67,7 +67,6 @@ class Admin extends CI_Controller {
 		if(!$name || !$email || !$password){
 			flash('warning','Boş Alanları Doldurun');
 			back();
-			back();
 		}else{
 
 			$exist = $this->common_model->get(['email'=>$email],"admin");
@@ -151,8 +150,27 @@ class Admin extends CI_Controller {
 		$this->load->view('back/hakkimizda');
 	}
 	public function iletisim(){
-		$this->load->view('back/iletisim');
+		$data['iletisimler'] = $this->common_model->get_all("iletisim");
+		$this->load->view('back/iletisim',$data);
 	}
+
+	public function mesajsil($id){
+		$exist = $this->common_model->get(['id'=>$id],"iletisim");
+		if($exist){
+			$delete = $this->common_model->delete("iletisim",['id'=>$id]);
+			if($delete){
+				flash('success','Mesaj Silindi');
+				back();
+			}else{
+				flash('danger','Mesaj Silme Başarısız');
+				back();
+			}
+		}else{
+			flash('danger','Mesaj Bulunamadı');
+			redirect("admin/iletisim");
+		}
+	}
+
 	public function blog(){
 		$this->load->view('back/blog');
 	}

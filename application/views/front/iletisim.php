@@ -17,23 +17,24 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
+                        <?= flash2read() ?>
                         <p>İletişime geçmek ister misiniz? Bana mesaj göndermek için aşağıdaki formu doldurun, size en kısa sürede geri döneceğim!</p>
                         <div class="my-5">
-                            <form id="contactForm" action="" method="post">
+                            <form id="contactForm" action="<?= base_url('home/iletisimpost/') ?>" method="post">
                                 <div class="form-floating">
-                                    <input class="form-control" id="name" type="text" placeholder="İsminizi girin..." />
+                                    <input class="form-control" id="name" name="isim" type="text" placeholder="İsminizi girin..." />
                                     <label for="name">İsim</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input class="form-control" id="email" type="email" placeholder="Email adresinizi girin..." />
+                                    <input class="form-control" id="email" name="email" type="email" placeholder="Email adresinizi girin..." />
                                     <label for="email">Email</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input class="form-control" id="phone" type="tel" placeholder="Telefon numarası girin..." />
+                                    <input class="form-control" id="phone" name="telefon" type="tel" placeholder="Telefon numarası girin..." />
                                     <label for="phone">Telefon</label>
                                 </div>
                                 <div class="form-floating">
-                                    <textarea class="form-control" id="message" placeholder="Mesajınızı girin..." style="height: 12rem"></textarea>
+                                    <textarea class="form-control" id="message" name="mesaj" placeholder="Mesajınızı girin..." style="height: 12rem"></textarea>
                                     <label for="message">Mesaj</label>
                                 </div>
                                 <br />

@@ -6,10 +6,6 @@
                 <h5 class="card-title">Yönetici Ekleyin</h5>
             </div>
             <div class="card-body">
-            <?php if($this->session->flashdata('empty')){echo "<div class='alert alert-warning'>".$this->session->flashdata('empty').'</div>'; } ?>
-            <?php if($this->session->flashdata('exist')){echo "<div class='alert alert-warning'>".$this->session->flashdata('exist').'</div>'; } ?>
-            <?php if($this->session->flashdata('success')){echo "<div class='alert alert-success'>".$this->session->flashdata('success').'</div>'; } ?>
-            <?php if($this->session->flashdata('error')){echo "<div class='alert alert-danger'>".$this->session->flashdata('error').'</div>'; } ?>
                 <form action="<?= base_url('admin/yoneticipost/') ?>" method="post">
                     <div class="form-group mb-3">
                         <label>Yönetici Adı</label>
