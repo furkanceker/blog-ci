@@ -30,19 +30,12 @@
                                 Ayarlar
                             </a>
                             <div class="sb-sidenav-menu-heading">Site</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Sayfalar
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <a class="nav-link" href="<?= base_url('admin/iletisim/') ?>">
+                                <div class="sb-nav-link-icon"><i class="fas fa-phone"></i></div>
+                                İletişim
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?= base_url('admin/hakkimizda/') ?>">Hakkımızda</a>
-                                    <a class="nav-link" href="<?= base_url('admin/iletisim/') ?>">İletişim</a>
-                                </nav>
-                            </div>
                             <a class="nav-link" href="<?= base_url('admin/blog/') ?>">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Blog
                             </a>
                             <div class="sb-sidenav-menu-heading">Admin</div>

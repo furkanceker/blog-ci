@@ -172,7 +172,49 @@ class Admin extends CI_Controller {
 	}
 
 	public function blog(){
-		$this->load->view('back/blog');
+		$data['bloglar'] = $this->common_model->get_all("bloglar");
+		$this->load->view('back/blog',$data);
+	}
+
+	public function blogpost(){
+		$baslik = postvalue('baslik');
+		$yazar = postvalue('yazar');
+		$metin = $this->input->post('aciklama');
+		if(!$baslik || !$yazar || !$metin){
+			flash('warning','Boş Alanları Doldurun');
+			back();
+		}else{
+			$data = [
+				'baslik' => $baslik,	
+				'yazar' => $yazar,	
+				'aciklama' => $metin,	
+			];
+			$query = $this->common_model->insert("bloglar",$data);
+			if($query){
+				flash('success','Blog Eklendi');
+				back();
+			}else{
+				flash('danger','Blog Ekleme Başarısız');
+				back();
+			}
+		}
+	}
+
+	public function blogsil($id){
+		$exist = $this->common_model->get(['id'=>$id],"bloglar");
+		if($exist){
+			$delete = $this->common_model->delete("bloglar",['id'=>$id]);
+			if($delete){
+				flash('success','Blog Silindi');
+				back();
+			}else{
+				flash('danger','Blog Silme Başarısız');
+				back();
+			}
+		}else{
+			flash('danger','Blog Bulunamadı');
+			redirect("admin/blog");
+		}
 	}
 
 	public function logout(){

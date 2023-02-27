@@ -5,7 +5,8 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('front/index');
+		$data['bloglar'] = $this->common_model->get_all("bloglar");
+		$this->load->view('front/index',$data);
 	}
 	public function hakkimizda()
 	{
